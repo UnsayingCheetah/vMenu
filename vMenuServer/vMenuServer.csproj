@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
     <DebugType>embedded</DebugType>
@@ -19,7 +19,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     
-    <PackageReference Include="CitizenFX.Core.Server" Version="1.0.5049">
+    <PackageReference Include="CitizenFX.Core.Server" Version="1.0.5611">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     
