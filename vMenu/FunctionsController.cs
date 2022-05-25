@@ -1973,7 +1973,7 @@ namespace vMenuClient
 
                 if (restoreDefault)
                 {
-                    await MainMenu.MpPedCustomizationMenu.SpawnThisCharacter(GetResourceKvpString("vmenu_default_character"), false);
+                    await RestorePlayerAppearance();
                 }
                 else
                 {

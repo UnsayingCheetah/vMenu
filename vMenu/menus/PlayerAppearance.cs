@@ -107,6 +107,7 @@ namespace vMenuClient
             MenuController.AddSubmenu(savedPedsMenu, selectedSavedPedMenu);
             MenuItem spawnSavedPed = new MenuItem("Spawn Saved Ped", "Spawn this saved ped.");
             MenuItem cloneSavedPed = new MenuItem("Clone Saved Ped", "Clone this saved ped.");
+            MenuItem setAsDefaultPed = new MenuItem("Set as Default Ped", "If you set this character as your default character, and you enable the 'Respawn As Default Character' option in the Misc Settings menu, then you will be set as this character whenever you (re)spawn.");
             MenuItem renameSavedPed = new MenuItem("Rename Saved Ped", "Rename this saved ped.") { LeftIcon = MenuItem.Icon.WARNING };
             MenuItem replaceSavedPed = new MenuItem("~r~Replace Saved Ped", "Repalce this saved ped with your current ped. Note this can not be undone!") { LeftIcon = MenuItem.Icon.WARNING };
             MenuItem deleteSavedPed = new MenuItem("~r~Delete Saved Ped", "Delete this saved ped. Note this can not be undone!") { LeftIcon = MenuItem.Icon.WARNING };
@@ -120,6 +121,7 @@ namespace vMenuClient
 
             selectedSavedPedMenu.AddMenuItem(spawnSavedPed);
             selectedSavedPedMenu.AddMenuItem(cloneSavedPed);
+            selectedSavedPedMenu.AddMenuItem(setAsDefaultPed);
             selectedSavedPedMenu.AddMenuItem(renameSavedPed);
             selectedSavedPedMenu.AddMenuItem(replaceSavedPed);
             selectedSavedPedMenu.AddMenuItem(deleteSavedPed);
@@ -157,6 +159,11 @@ namespace vMenuClient
                             }
                         }
                     }
+                }
+                else if (item == setAsDefaultPed)
+                {
+                    Notify.Success($"Your character <C>{savedPed.Key.Substring(4)}</C> will now be used as your default character whenever you (re)spawn.");
+                    SetResourceKvp("vmenu_default_character", savedPed.Key);
                 }
                 else if (item == renameSavedPed)
                 {

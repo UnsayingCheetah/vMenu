@@ -2215,6 +2215,23 @@ namespace vMenuClient
                 Notify.Error(CommonErrors.InvalidModel);
             }
         }
+
+        /// <summary>
+        /// Set the player model by asking for user input.
+        /// </summary>
+        public static async Task RestorePlayerAppearance()
+        {
+            String value = GetResourceKvpString("vmenu_default_character");
+            if (value.Substring(0, 3) == "ped")
+            {
+                PedInfo savedPed = StorageManager.GetSavedPedInfo(value);
+                await SetPlayerSkin(savedPed.model, savedPed, true);
+            }
+            else
+            {
+                await MainMenu.MpPedCustomizationMenu.SpawnThisCharacter(value, false);
+            }
+        }
         #endregion
 
         #region Save Ped Model + Customizations

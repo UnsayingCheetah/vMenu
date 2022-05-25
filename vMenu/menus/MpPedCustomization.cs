@@ -2127,7 +2127,7 @@ namespace vMenuClient
             MenuItem spawnPed = new MenuItem("Spawn Saved Character", "Spawns the selected saved character.");
             editPedBtn = new MenuItem("Edit Saved Character", "This allows you to edit everything about your saved character. The changes will be saved to this character's save file entry once you hit the save button.");
             MenuItem clonePed = new MenuItem("Clone Saved Character", "This will make a clone of your saved character. It will ask you to provide a name for that character. If that name is already taken the action will be canceled.");
-            MenuItem setAsDefaultPed = new MenuItem("Set As Default Character", "If you set this character as your default character, and you enable the 'Respawn As Default MP Character' option in the Misc Settings menu, then you will be set as this character whenever you (re)spawn.");
+            MenuItem setAsDefaultPed = new MenuItem("Set As Default Character", "If you set this character as your default character, and you enable the 'Respawn As Default Character' option in the Misc Settings menu, then you will be set as this character whenever you (re)spawn.");
             MenuItem renameCharacter = new MenuItem("Rename Saved Character", "You can rename this saved character. If the name is already taken then the action will be canceled.");
             MenuItem delPed = new MenuItem("Delete Saved Character", "Deletes the selected saved character. This can not be undone!")
             {
