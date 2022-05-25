@@ -3,12 +3,12 @@ Build it yourself plz
 
 
 #### M-vMenu Credits:
-AlexR32 : for Add vehicle stance and drift tires (PR)
-MichaelCoding25 : for mpsecurity patch (PR)
-NylanderrDK : destroy engine feature (PR)
-Zhincore: Allow respawning as saved ped instead of only mp ped feature (fork)
+- AlexR32 : for Add vehicle stance and drift tires (PR)
+- MichaelCoding25 : for mpsecurity patch (PR)
+- NylanderrDK : destroy engine feature (PR)
+- Zhincore: Allow respawning as saved ped instead of only mp ped feature (fork)
 
-Vespura/TomGrobbe : For being the original creator of this amazing menu!
+- Vespura/TomGrobbe : For being the original creator of this amazing menu!
 
 --------
 
