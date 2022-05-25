@@ -10,6 +10,8 @@ Build it yourself plz
 
 - Vespura/TomGrobbe : For being the original creator of this amazing menu!
 
+If i missed anyone, sorry for being stupid!, just let me know and ill add you.
+
 --------
 
 
