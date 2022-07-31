@@ -14,7 +14,7 @@ Build it yourself plz
 If i missed anyone, sorry for being stupid!, just let me know and ill add you.
 
 --------
-
+All I have done is added the most recent Updates Weapons & Vehicles "(2699) (MPSUM2) (The Criminal Enterprise DLC)"
 
 # vMenu
 vMenu is server sided menu for FiveM servers, including full\* permission support.
