@@ -620,7 +620,7 @@ namespace vMenuClient
                 "SULTAN3", // LS TUNERS (MPTUNER) DLC - Requires b2372
                 "SURANO",
                 "TAMPA2",
-                "TEN", // Criminal Enterprise (MPSUM2) DLC - Requires b2699
+                "TENF", // Criminal Enterprise (MPSUM2) DLC - Requires b2699
                 "TENF2", // Criminal Enterprise (MPSUM2) DLC - Requires b2699
                 "TROPOS",
                 "VERLIERER2",
