@@ -7,6 +7,7 @@ Build it yourself plz
 - MichaelCoding25 : for mpsecurity patch (PR)
 - NylanderrDK : destroy engine feature (PR)
 - Zhincore: Allow respawning as saved ped instead of only mp ped feature (fork)
+- matty45: Compiling all of the other PR from the main branch (fork)
 
 - Vespura/TomGrobbe : For being the original creator of this amazing menu!
 
