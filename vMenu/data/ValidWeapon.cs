@@ -224,7 +224,7 @@ namespace vMenuClient
             { "weapon_fertilizercan", GetLabelText("WTD_FERTILIZERCAN") },
             { "weapon_stungun_mp", GetLabelText("WTD_STNGUNMP") },
             // MPSUM2 DLC (v 2699)
-            { "weapon_precisionrifle", GetLabelText("WTD_PRIFLE") + "~n~" },
+            { "weapon_precisionrifle", GetLabelText("WTD_PRECRIFLE") },
             { "weapon_tacticalrifle", GetLabelText("WTD_TACRIFLE") },
             { "weapon_metaldetector", GetLabelText("WTD_METALDETECTOR") },
         };
@@ -335,7 +335,7 @@ namespace vMenuClient
             { "weapon_fertilizercan", GetLabelText("WT_FERTILIZERCAN") },
             { "weapon_stungun_mp", GetLabelText("WT_STNGUNMP") },
             // MPSUM2 DLC (v 2699)
-            { "weapon_precisionrifle", GetLabelText("WT_PRIFLE") },
+            { "weapon_precisionrifle", GetLabelText("WT_PRECRIFLE") },
             { "weapon_tacticalrifle", GetLabelText("WT_TACRIFLE") },
             { "weapon_metaldetector", GetLabelText("WT_METALDETECTOR") },
         };
