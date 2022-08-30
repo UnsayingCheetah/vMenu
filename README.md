@@ -1,8 +1,8 @@
-#### Latest Builds
-Build it yourself plz
+Let me know if there are any issues.
 
 
-#### M-vMenu Credits:
+
+#### vMenu Credits:
 - AlexR32 : for Add vehicle stance and drift tires (PR)
 - MichaelCoding25 : for mpsecurity patch (PR)
 - NylanderrDK : destroy engine feature (PR)
