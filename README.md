@@ -1,5 +1,5 @@
-#### Latest Builds
-Build it yourself plz
+Let me know if there are any issues.
+
 
 
 #### vMenu Credits:
