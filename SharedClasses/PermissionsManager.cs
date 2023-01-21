@@ -308,13 +308,11 @@ namespace vMenuShared
             WPEMPLauncher,
             WPHeavyRifle,
             WPFertilizerCan,
-            WPStunGunMP,
             // MPSUM2 DLC (v 2699)
             WPPrecisionRifle,
             WPTacticalRifle,
-            WPMetalDetector,
             // MPCHRISTMAS3 (v 2802)
-            WPPistolXM3,
+            WPPistolWM29,
             WPCandyCane,
             WPAcidPackage,
             #endregion

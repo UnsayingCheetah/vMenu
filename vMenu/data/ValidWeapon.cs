@@ -446,13 +446,11 @@ namespace vMenuClient
             ["weapon_emplauncher"] = Permission.WPEMPLauncher,
             ["weapon_heavyrifle"] = Permission.WPHeavyRifle,
             ["weapon_fertilizercan"] = Permission.WPFertilizerCan,
-            ["weapon_stungun_mp"] = Permission.WPStunGunMP,
             // MPSUM2 DLC (v 2699)
             ["weapon_precisionrifle"] = Permission.WPPrecisionRifle,
             ["weapon_tacticalrifle"] = Permission.WPTacticalRifle,
-            ["weapon_metaldetector"] = Permission.WPMetalDetector,
             // MPCHRISTMAS3 (v 2802)
-            ["weapon_pistolxm3"] = Permission.WPPistolXM3,
+            ["weapon_pistolxm3"] = Permission.WPPistolWM29,
             ["weapon_candycane"] = Permission.WPCandyCane,
             ["weapon_acidpackage"] = Permission.WPAcidPackage,
         };
