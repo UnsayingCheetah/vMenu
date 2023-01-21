@@ -222,11 +222,13 @@ namespace vMenuClient
             { "weapon_emplauncher", GetLabelText("WTD_EMPL") },
             { "weapon_heavyrifle", GetLabelText("WTD_HEAVYRIFLE") },
             { "weapon_fertilizercan", GetLabelText("WTD_FERTILIZERCAN") },
-            { "weapon_stungun_mp", GetLabelText("WTD_STNGUNMP") },
             // MPSUM2 DLC (v 2699)
             { "weapon_precisionrifle", GetLabelText("WTD_PRECRIFLE") },
             { "weapon_tacticalrifle", GetLabelText("WTD_TACRIFLE") },
-            { "weapon_metaldetector", GetLabelText("WTD_METALDETECTOR") },
+            // CHRISTMAS3 DLC (v 2802)
+            { "weapon_pistolxm3", GetLabelText("WTD_PISTOLXM3") },
+            { "weapon_candycane", GetLabelText("WTD_CANDYCANE") },
+            { "weapon_acidpackage", GetLabelText("WTD_ACIDPACKAGE") },
         };
 
         public static readonly Dictionary<string, string> weaponNames = new Dictionary<string, string>()
@@ -333,11 +335,13 @@ namespace vMenuClient
             { "weapon_emplauncher", GetLabelText("WT_EMPL") },
             { "weapon_heavyrifle", GetLabelText("WT_HEAVYRIFLE") },
             { "weapon_fertilizercan", GetLabelText("WT_FERTILIZERCAN") },
-            { "weapon_stungun_mp", GetLabelText("WT_STNGUNMP") },
             // MPSUM2 DLC (v 2699)
             { "weapon_precisionrifle", GetLabelText("WT_PRECRIFLE") },
             { "weapon_tacticalrifle", GetLabelText("WT_TACRIFLE") },
-            { "weapon_metaldetector", GetLabelText("WT_METALDETECTOR") },
+            // CHRISTMAS3 DLC (v 2802)
+            { "weapon_pistolxm3", GetLabelText("WT_PISTOLXM3") },
+            { "weapon_candycane", GetLabelText("WT_CANDYCANE") },
+            { "weapon_acidpackage", GetLabelText("WT_ACIDPACKAGE") },
         };
         #endregion
 
@@ -450,7 +454,7 @@ namespace vMenuClient
             ["weapon_precisionrifle"] = Permission.WPPrecisionRifle,
             ["weapon_tacticalrifle"] = Permission.WPTacticalRifle,
             // MPCHRISTMAS3 (v 2802)
-            ["weapon_pistolxm3"] = Permission.WPPistolWM29,
+            ["weapon_pistolxm3"] = Permission.WPPistolXM3,
             ["weapon_candycane"] = Permission.WPCandyCane,
             ["weapon_acidpackage"] = Permission.WPAcidPackage,
         };

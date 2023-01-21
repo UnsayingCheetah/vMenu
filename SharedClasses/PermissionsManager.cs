@@ -312,7 +312,7 @@ namespace vMenuShared
             WPPrecisionRifle,
             WPTacticalRifle,
             // MPCHRISTMAS3 (v 2802)
-            WPPistolWM29,
+            WPPistolXM3,
             WPCandyCane,
             WPAcidPackage,
             #endregion
