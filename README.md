@@ -2,7 +2,7 @@
 Build it yourself plz
 
 
-#### M-vMenu Credits:
+#### vMenu Credits:
 - AlexR32 : for Add vehicle stance and drift tires (PR)
 - MichaelCoding25 : for mpsecurity patch (PR)
 - NylanderrDK : destroy engine feature (PR)
@@ -14,7 +14,7 @@ Build it yourself plz
 If i missed anyone, sorry for being stupid!, just let me know and ill add you.
 
 --------
-All I have done is added the most recent Updates Weapons & Vehicles "(2699) (MPSUM2) (The Criminal Enterprise DLC)"
+All I have done is added the most recent Updates Weapons & Vehicles "(2802) (MPCHRISTMAS3) (Los Santos Drug Wars DLC)"
 
 # vMenu
 vMenu is server sided menu for FiveM servers, including full\* permission support.
