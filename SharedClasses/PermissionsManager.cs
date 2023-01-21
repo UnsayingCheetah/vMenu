@@ -313,6 +313,10 @@ namespace vMenuShared
             WPPrecisionRifle,
             WPTacticalRifle,
             WPMetalDetector,
+            // MPCHRISTMAS3 (v 2802)
+            WPPistolXM3,
+            WPCandyCane,
+            WPAcidPackage,
             #endregion
 
             // Weapon Loadouts Menu

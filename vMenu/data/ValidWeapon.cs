@@ -451,6 +451,10 @@ namespace vMenuClient
             ["weapon_precisionrifle"] = Permission.WPPrecisionRifle,
             ["weapon_tacticalrifle"] = Permission.WPTacticalRifle,
             ["weapon_metaldetector"] = Permission.WPMetalDetector,
+            // MPCHRISTMAS3 (v 2802)
+            ["weapon_pistolxm3"] = Permission.WPPistolXM3,
+            ["weapon_candycane"] = Permission.WPCandyCane,
+            ["weapon_acidpackage"] = Permission.WPAcidPackage,
         };
         #endregion
 
@@ -837,6 +841,9 @@ namespace vMenuClient
             ["COMPONENT_AT_AR_FLSH_REH"] = GetLabelText("WCT_FLASH"),
             ["COMPONENT_AT_AR_SUPP_02"] = GetLabelText("WCT_SUPP"),
             ["COMPONENT_AT_AR_AFGRIP"] = GetLabelText("WCT_GRIP"),
+            // MPCHRISTMAS3 (v 2802)
+            ["COMPONENT_PISTOLXM3_CLIP_01"] = GetLabelText("WCT_CLIP1"),
+            ["COMPONENT_PISTOLXM3_SUPP"] = GetLabelText("WCT_SUPP"),
         };
         #endregion
 
