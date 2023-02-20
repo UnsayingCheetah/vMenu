@@ -217,7 +217,7 @@ namespace vMenuClient
         {
             await UpdateWeatherParticles();
             SetArtificialLightsState(IsBlackoutEnabled);
-            SetArtificialLightsStateAffectsVehicles(true);
+            SetArtificialLightsStateAffectsVehicles(false);
             if (GetNextWeatherType() != GetHashKey(GetServerWeather))
             {
                 SetWeatherTypeOvertimePersist(GetServerWeather, (float)WeatherChangeTime);
