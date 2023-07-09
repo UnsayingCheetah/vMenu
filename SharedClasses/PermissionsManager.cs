@@ -315,6 +315,9 @@ namespace vMenuShared
             WPPistolXM3,
             WPCandyCane,
             WPAcidPackage,
+            // MP2023 (v 2944)
+            WPTecPistol,
+
             #endregion
 
             // Weapon Loadouts Menu
