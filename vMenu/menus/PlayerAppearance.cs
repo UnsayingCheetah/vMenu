@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MenuAPI;
-using Newtonsoft.Json;
+
 using CitizenFX.Core;
-using static CitizenFX.Core.UI.Screen;
+
+using MenuAPI;
+
 using static CitizenFX.Core.Native.API;
 using static vMenuClient.CommonFunctions;
 using static vMenuShared.PermissionsManager;
 
-namespace vMenuClient
+namespace vMenuClient.menus
 {
     public class PlayerAppearance
     {
@@ -21,18 +20,18 @@ namespace vMenuClient
         private Menu savedPedsMenu;
         private Menu spawnPedsMenu;
         private Menu addonPedsMenu;
-        private Menu mainPedsMenu = new Menu("Main Peds", "Spawn A Ped");
-        private Menu animalsPedsMenu = new Menu("Animals", "Spawn A Ped");
-        private Menu malePedsMenu = new Menu("Male Peds", "Spawn A Ped");
-        private Menu femalePedsMenu = new Menu("Female Peds", "Spawn A Ped");
-        private Menu otherPedsMenu = new Menu("Other Peds", "Spawn A Ped");
+        private readonly Menu mainPedsMenu = new("Main Peds", "Spawn A Ped");
+        private readonly Menu animalsPedsMenu = new("Animals", "Spawn A Ped");
+        private readonly Menu malePedsMenu = new("Male Peds", "Spawn A Ped");
+        private readonly Menu femalePedsMenu = new("Female Peds", "Spawn A Ped");
+        private readonly Menu otherPedsMenu = new("Other Peds", "Spawn A Ped");
 
         public static Dictionary<string, uint> AddonPeds;
 
         public static int ClothingAnimationType { get; set; } = UserDefaults.PAClothingAnimationType;
 
-        private Dictionary<MenuListItem, int> drawablesMenuListItems = new Dictionary<MenuListItem, int>();
-        private Dictionary<MenuListItem, int> propsMenuListItems = new Dictionary<MenuListItem, int>();
+        private readonly Dictionary<MenuListItem, int> drawablesMenuListItems = new();
+        private readonly Dictionary<MenuListItem, int> propsMenuListItems = new();
 
         #region create the menu
         /// <summary>
@@ -60,26 +59,26 @@ namespace vMenuClient
             MenuController.AddSubmenu(spawnPedsMenu, otherPedsMenu);
 
             // Create the menu items.
-            MenuItem pedCustomization = new MenuItem("Ped Customization", "Modify your ped's appearance.") { Label = "→→→" };
-            MenuItem saveCurrentPed = new MenuItem("Save Ped", "Save your current ped. Note for the MP Male/Female peds this won't save most of their customization, just because that's impossible. Create those characters in the MP Character creator instead.");
-            MenuItem savedPedsBtn = new MenuItem("Saved Peds", "Edit, rename, clone, spawn or delete saved peds.") { Label = "→→→" };
-            MenuItem spawnPedsBtn = new MenuItem("Spawn Peds", "Change ped model by selecting one from the list or by selecting an addon ped from the list.") { Label = "→→→" };
+            var pedCustomization = new MenuItem("Ped Customization", "Modify your ped's appearance.") { Label = "→→→" };
+            var saveCurrentPed = new MenuItem("Save Ped", "Save your current ped. Note for the MP Male/Female peds this won't save most of their customization, just because that's impossible. Create those characters in the MP Character creator instead.");
+            var savedPedsBtn = new MenuItem("Saved Peds", "Edit, rename, clone, spawn or delete saved peds.") { Label = "→→→" };
+            var spawnPedsBtn = new MenuItem("Spawn Peds", "Change ped model by selecting one from the list or by selecting an addon ped from the list.") { Label = "→→→" };
 
 
-            MenuItem spawnByNameBtn = new MenuItem("Spawn By Name", "Spawn a ped by entering it's name manually.");
-            MenuItem addonPedsBtn = new MenuItem("Addon Peds", "Spawn a ped from the addon peds list.") { Label = "→→→" };
-            MenuItem mainPedsBtn = new MenuItem("Main Peds", "Select a new ped from the main player-peds list.") { Label = "→→→" };
-            MenuItem animalPedsBtn = new MenuItem("Animals", "Become an animal. ~r~Note this may crash your own or other players' game if you die as an animal, godmode can NOT prevent this.") { Label = "→→→" };
-            MenuItem malePedsBtn = new MenuItem("Male Peds", "Select a male ped.") { Label = "→→→" };
-            MenuItem femalePedsBtn = new MenuItem("Female Peds", "Select a female ped.") { Label = "→→→" };
-            MenuItem otherPedsBtn = new MenuItem("Other Peds", "Select a ped.") { Label = "→→→" };
+            var spawnByNameBtn = new MenuItem("Spawn By Name", "Spawn a ped by entering it's name manually.");
+            var addonPedsBtn = new MenuItem("Addon Peds", "Spawn a ped from the addon peds list.") { Label = "→→→" };
+            var mainPedsBtn = new MenuItem("Main Peds", "Select a new ped from the main player-peds list.") { Label = "→→→" };
+            var animalPedsBtn = new MenuItem("Animals", "Become an animal. ~r~Note this may crash your own or other players' game if you die as an animal, godmode can NOT prevent this.") { Label = "→→→" };
+            var malePedsBtn = new MenuItem("Male Peds", "Select a male ped.") { Label = "→→→" };
+            var femalePedsBtn = new MenuItem("Female Peds", "Select a female ped.") { Label = "→→→" };
+            var otherPedsBtn = new MenuItem("Other Peds", "Select a ped.") { Label = "→→→" };
 
-            List<string> walkstyles = new List<string>() { "Normal", "Injured", "Tough Guy", "Femme", "Gangster", "Posh", "Sexy", "Business", "Drunk", "Hipster" };
-            MenuListItem walkingStyle = new MenuListItem("Walking Style", walkstyles, 0, "Change the walking style of your current ped. " +
+            var walkstyles = new List<string>() { "Normal", "Injured", "Tough Guy", "Femme", "Gangster", "Posh", "Sexy", "Business", "Drunk", "Hipster" };
+            var walkingStyle = new MenuListItem("Walking Style", walkstyles, 0, "Change the walking style of your current ped. " +
                 "You need to re-apply this each time you change player model or load a saved ped.");
 
-            List<string> clothingGlowAnimations = new List<string>() { "On", "Off", "Fade", "Flash" };
-            MenuListItem clothingGlowType = new MenuListItem("Illuminated Clothing Style", clothingGlowAnimations, ClothingAnimationType, "Set the style of the animation used on your player's illuminated clothing items.");
+            var clothingGlowAnimations = new List<string>() { "On", "Off", "Fade", "Flash" };
+            var clothingGlowType = new MenuListItem("Illuminated Clothing Style", clothingGlowAnimations, ClothingAnimationType, "Set the style of the animation used on your player's illuminated clothing items.");
 
             // Add items to the menu.
             menu.AddMenuItem(pedCustomization);
@@ -103,14 +102,13 @@ namespace vMenuClient
             MenuController.BindMenuItem(menu, savedPedsMenu, savedPedsBtn);
             MenuController.BindMenuItem(menu, spawnPedsMenu, spawnPedsBtn);
 
-            Menu selectedSavedPedMenu = new Menu("Saved Ped", "renameme");
+            var selectedSavedPedMenu = new Menu("Saved Ped", "renameme");
             MenuController.AddSubmenu(savedPedsMenu, selectedSavedPedMenu);
-            MenuItem spawnSavedPed = new MenuItem("Spawn Saved Ped", "Spawn this saved ped.");
-            MenuItem cloneSavedPed = new MenuItem("Clone Saved Ped", "Clone this saved ped.");
-            MenuItem setAsDefaultPed = new MenuItem("Set as Default Ped", "If you set this character as your default character, and you enable the 'Respawn As Default Character' option in the Misc Settings menu, then you will be set as this character whenever you (re)spawn.");
-            MenuItem renameSavedPed = new MenuItem("Rename Saved Ped", "Rename this saved ped.") { LeftIcon = MenuItem.Icon.WARNING };
-            MenuItem replaceSavedPed = new MenuItem("~r~Replace Saved Ped", "Repalce this saved ped with your current ped. Note this can not be undone!") { LeftIcon = MenuItem.Icon.WARNING };
-            MenuItem deleteSavedPed = new MenuItem("~r~Delete Saved Ped", "Delete this saved ped. Note this can not be undone!") { LeftIcon = MenuItem.Icon.WARNING };
+            var spawnSavedPed = new MenuItem("Spawn Saved Ped", "Spawn this saved ped.");
+            var cloneSavedPed = new MenuItem("Clone Saved Ped", "Clone this saved ped.");
+            var renameSavedPed = new MenuItem("Rename Saved Ped", "Rename this saved ped.") { LeftIcon = MenuItem.Icon.WARNING };
+            var replaceSavedPed = new MenuItem("~r~Replace Saved Ped", "Replace this saved ped with your current ped. Note this can not be undone!") { LeftIcon = MenuItem.Icon.WARNING };
+            var deleteSavedPed = new MenuItem("~r~Delete Saved Ped", "Delete this saved ped. Note this can not be undone!") { LeftIcon = MenuItem.Icon.WARNING };
 
             if (!IsAllowed(Permission.PASpawnSaved))
             {
@@ -121,12 +119,11 @@ namespace vMenuClient
 
             selectedSavedPedMenu.AddMenuItem(spawnSavedPed);
             selectedSavedPedMenu.AddMenuItem(cloneSavedPed);
-            selectedSavedPedMenu.AddMenuItem(setAsDefaultPed);
             selectedSavedPedMenu.AddMenuItem(renameSavedPed);
             selectedSavedPedMenu.AddMenuItem(replaceSavedPed);
             selectedSavedPedMenu.AddMenuItem(deleteSavedPed);
 
-            KeyValuePair<string, PedInfo> savedPed = new KeyValuePair<string, PedInfo>();
+            var savedPed = new KeyValuePair<string, PedInfo>();
 
             selectedSavedPedMenu.OnItemSelect += async (sender, item, index) =>
             {
@@ -136,7 +133,7 @@ namespace vMenuClient
                 }
                 else if (item == cloneSavedPed)
                 {
-                    string name = await GetUserInput($"Enter a clone name ({savedPed.Key.Substring(4)})", savedPed.Key.Substring(4), 30);
+                    var name = await GetUserInput($"Enter a clone name ({savedPed.Key.Substring(4)})", savedPed.Key.Substring(4), 30);
                     if (string.IsNullOrEmpty(name))
                     {
                         Notify.Error(CommonErrors.InvalidSaveName);
@@ -160,14 +157,9 @@ namespace vMenuClient
                         }
                     }
                 }
-                else if (item == setAsDefaultPed)
-                {
-                    Notify.Success($"Your character <C>{savedPed.Key.Substring(4)}</C> will now be used as your default character whenever you (re)spawn.");
-                    SetResourceKvp("vmenu_default_character", savedPed.Key);
-                }
                 else if (item == renameSavedPed)
                 {
-                    string name = await GetUserInput($"Enter a new name for: {savedPed.Key.Substring(4)}", savedPed.Key.Substring(4), 30);
+                    var name = await GetUserInput($"Enter a new name for: {savedPed.Key.Substring(4)}", savedPed.Key.Substring(4), 30);
                     if (string.IsNullOrEmpty(name))
                     {
                         Notify.Error(CommonErrors.InvalidSaveName);
@@ -197,7 +189,7 @@ namespace vMenuClient
                     if (item.Label == "Are you sure?")
                     {
                         item.Label = "";
-                        bool success = await SavePed(savedPed.Key.Substring(4), overrideExistingPed: true);
+                        var success = await SavePed(savedPed.Key.Substring(4), overrideExistingPed: true);
                         if (!success)
                         {
                             Notify.Error(CommonErrors.UnknownError, placeholderValue: " Could not save your replaced ped. Don't worry, your original ped is unharmed.");
@@ -246,15 +238,15 @@ namespace vMenuClient
 
             void UpdateSavedPedsMenu()
             {
-                int size = savedPedsMenu.Size;
+                var size = savedPedsMenu.Size;
 
-                Dictionary<string, PedInfo> savedPeds = StorageManager.GetSavedPeds();
+                var savedPeds = StorageManager.GetSavedPeds();
 
                 foreach (var ped in savedPeds)
                 {
                     if (size < 1 || !savedPedsMenu.GetMenuItems().Any(e => ped.Key == e.ItemData.Key))
                     {
-                        MenuItem btn = new MenuItem(ped.Key.Substring(4), "Click to manage this saved ped.") { Label = "→→→", ItemData = ped };
+                        var btn = new MenuItem(ped.Key.Substring(4), "Click to manage this saved ped.") { Label = "→→→", ItemData = ped };
                         savedPedsMenu.AddMenuItem(btn);
                         MenuController.BindMenuItem(savedPedsMenu, selectedSavedPedMenu, btn);
                     }
@@ -314,13 +306,13 @@ namespace vMenuClient
 
                 foreach (var ped in addons)
                 {
-                    string name = GetLabelText(ped.Key);
+                    var name = GetLabelText(ped.Key);
                     if (string.IsNullOrEmpty(name) || name == "NULL")
                     {
                         name = ped.Key;
                     }
 
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this model.") { Label = $"({name})" };
+                    var pedBtn = new MenuItem(ped.Key, "Click to spawn this model.") { Label = $"({name})" };
 
                     if (!IsModelInCdimage(ped.Value) || !IsModelAPed(ped.Value))
                     {
@@ -365,37 +357,37 @@ namespace vMenuClient
 
                 foreach (var animal in animalModels)
                 {
-                    MenuItem animalBtn = new MenuItem(animal.Key, "Click to spawn this animal.") { Label = $"({animal.Value})" };
+                    var animalBtn = new MenuItem(animal.Key, "Click to spawn this animal.") { Label = $"({animal.Value})" };
                     animalsPedsMenu.AddMenuItem(animalBtn);
                 }
 
                 foreach (var ped in mainModels)
                 {
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
+                    var pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
                     mainPedsMenu.AddMenuItem(pedBtn);
                 }
 
                 foreach (var ped in maleModels)
                 {
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
+                    var pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
                     malePedsMenu.AddMenuItem(pedBtn);
                 }
 
                 foreach (var ped in femaleModels)
                 {
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
+                    var pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
                     femalePedsMenu.AddMenuItem(pedBtn);
                 }
 
                 foreach (var ped in otherPeds)
                 {
-                    MenuItem pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
+                    var pedBtn = new MenuItem(ped.Key, "Click to spawn this ped.") { Label = $"({ped.Value})" };
                     otherPedsMenu.AddMenuItem(pedBtn);
                 }
 
                 async void FilterMenu(Menu m, Control c)
                 {
-                    string input = await GetUserInput("Filter by ped model name, leave this empty to reset the filter");
+                    var input = await GetUserInput("Filter by ped model name, leave this empty to reset the filter");
                     if (!string.IsNullOrEmpty(input))
                     {
                         m.FilterMenuItems((mb) => mb.Label.ToLower().Contains(input.ToLower()) || mb.Text.ToLower().Contains(input.ToLower()));
@@ -430,7 +422,7 @@ namespace vMenuClient
                 async void SpawnPed(Menu m, MenuItem item, int index)
                 {
 
-                    uint model = (uint)GetHashKey(item.Text);
+                    var model = (uint)GetHashKey(item.Text);
                     if (m == animalsPedsMenu && !Game.PlayerPed.IsInWater)
                     {
                         switch (item.Text)
@@ -483,7 +475,7 @@ namespace vMenuClient
                 {
                     if (item == spawnByNameBtn)
                     {
-                        string model = await GetUserInput("Ped Model Name", 30);
+                        var model = await GetUserInput("Ped Model Name", 30);
                         if (!string.IsNullOrEmpty(model))
                         {
                             await SetPlayerSkin(model, new PedInfo() { version = -1 }, true);
@@ -538,12 +530,12 @@ namespace vMenuClient
             {
                 if (drawablesMenuListItems.ContainsKey(item))
                 {
-                    int drawableID = drawablesMenuListItems[item];
+                    var drawableID = drawablesMenuListItems[item];
                     SetPedComponentVariation(Game.PlayerPed.Handle, drawableID, newListIndex, 0, 0);
                 }
                 else if (propsMenuListItems.ContainsKey(item))
                 {
-                    int propID = propsMenuListItems[item];
+                    var propID = propsMenuListItems[item];
                     if (newListIndex == 0)
                     {
                         SetPedPropIndex(Game.PlayerPed.Handle, propID, newListIndex - 1, 0, false);
@@ -555,10 +547,10 @@ namespace vMenuClient
                     }
                     if (propID == 0)
                     {
-                        int component = GetPedPropIndex(Game.PlayerPed.Handle, 0);      // helmet index
-                        int texture = GetPedPropTextureIndex(Game.PlayerPed.Handle, 0); // texture
-                        int compHash = GetHashNameForProp(Game.PlayerPed.Handle, 0, component, texture); // prop combination hash
-                        if (N_0xd40aac51e8e4c663((uint)compHash) > 0) // helmet has visor. 
+                        var component = GetPedPropIndex(Game.PlayerPed.Handle, 0);      // helmet index
+                        var texture = GetPedPropTextureIndex(Game.PlayerPed.Handle, 0); // texture
+                        var compHash = GetHashNameForProp(Game.PlayerPed.Handle, 0, component, texture); // prop combination hash
+                        if (GetShopPedApparelVariantPropCount((uint)compHash) > 0) // helmet has visor. 
                         {
                             if (!IsHelpMessageBeingDisplayed())
                             {
@@ -578,25 +570,27 @@ namespace vMenuClient
             {
                 if (drawablesMenuListItems.ContainsKey(item)) // drawable
                 {
-                    int currentDrawableID = drawablesMenuListItems[item];
-                    int currentTextureIndex = GetPedTextureVariation(Game.PlayerPed.Handle, currentDrawableID);
-                    int maxDrawableTextures = GetNumberOfPedTextureVariations(Game.PlayerPed.Handle, currentDrawableID, listIndex) - 1;
+                    var currentDrawableID = drawablesMenuListItems[item];
+                    var currentTextureIndex = GetPedTextureVariation(Game.PlayerPed.Handle, currentDrawableID);
+                    var maxDrawableTextures = GetNumberOfPedTextureVariations(Game.PlayerPed.Handle, currentDrawableID, listIndex) - 1;
 
                     if (currentTextureIndex == -1)
+                    {
                         currentTextureIndex = 0;
+                    }
 
-                    int newTexture = currentTextureIndex < maxDrawableTextures ? currentTextureIndex + 1 : 0;
+                    var newTexture = currentTextureIndex < maxDrawableTextures ? currentTextureIndex + 1 : 0;
 
                     SetPedComponentVariation(Game.PlayerPed.Handle, currentDrawableID, listIndex, newTexture, 0);
                 }
                 else if (propsMenuListItems.ContainsKey(item)) // prop
                 {
-                    int currentPropIndex = propsMenuListItems[item];
-                    int currentPropVariationIndex = GetPedPropIndex(Game.PlayerPed.Handle, currentPropIndex);
-                    int currentPropTextureVariation = GetPedPropTextureIndex(Game.PlayerPed.Handle, currentPropIndex);
-                    int maxPropTextureVariations = GetNumberOfPedPropTextureVariations(Game.PlayerPed.Handle, currentPropIndex, currentPropVariationIndex) - 1;
+                    var currentPropIndex = propsMenuListItems[item];
+                    var currentPropVariationIndex = GetPedPropIndex(Game.PlayerPed.Handle, currentPropIndex);
+                    var currentPropTextureVariation = GetPedPropTextureIndex(Game.PlayerPed.Handle, currentPropIndex);
+                    var maxPropTextureVariations = GetNumberOfPedPropTextureVariations(Game.PlayerPed.Handle, currentPropIndex, currentPropVariationIndex) - 1;
 
-                    int newPropTextureVariationIndex = currentPropTextureVariation < maxPropTextureVariations ? currentPropTextureVariation + 1 : 0;
+                    var newPropTextureVariationIndex = currentPropTextureVariation < maxPropTextureVariations ? currentPropTextureVariation + 1 : 0;
                     SetPedPropIndex(Game.PlayerPed.Handle, currentPropIndex, currentPropVariationIndex, newPropTextureVariationIndex, true);
                 }
             };
@@ -633,22 +627,22 @@ namespace vMenuClient
             pedCustomizationMenu.ClearMenuItems();
 
             #region Ped Drawables
-            for (int drawable = 0; drawable < 12; drawable++)
+            for (var drawable = 0; drawable < 12; drawable++)
             {
-                int currentDrawable = GetPedDrawableVariation(Game.PlayerPed.Handle, drawable);
-                int maxVariations = GetNumberOfPedDrawableVariations(Game.PlayerPed.Handle, drawable);
-                int maxTextures = GetNumberOfPedTextureVariations(Game.PlayerPed.Handle, drawable, currentDrawable);
+                var currentDrawable = GetPedDrawableVariation(Game.PlayerPed.Handle, drawable);
+                var maxVariations = GetNumberOfPedDrawableVariations(Game.PlayerPed.Handle, drawable);
+                var maxTextures = GetNumberOfPedTextureVariations(Game.PlayerPed.Handle, drawable, currentDrawable);
 
                 if (maxVariations > 0)
                 {
-                    List<string> drawableTexturesList = new List<string>();
+                    var drawableTexturesList = new List<string>();
 
-                    for (int i = 0; i < maxVariations; i++)
+                    for (var i = 0; i < maxVariations; i++)
                     {
                         drawableTexturesList.Add($"Drawable #{i + 1} (of {maxVariations})");
                     }
 
-                    MenuListItem drawableTextures = new MenuListItem($"{textureNames[drawable]}", drawableTexturesList, currentDrawable, $"Use ← & → to select a ~o~{textureNames[drawable]} Variation~s~, press ~r~enter~s~ to cycle through the available textures.");
+                    var drawableTextures = new MenuListItem($"{textureNames[drawable]}", drawableTexturesList, currentDrawable, $"Use ← & → to select a ~o~{textureNames[drawable]} Variation~s~, press ~r~enter~s~ to cycle through the available textures.");
                     drawablesMenuListItems.Add(drawableTextures, drawable);
                     pedCustomizationMenu.AddMenuItem(drawableTextures);
                 }
@@ -656,25 +650,26 @@ namespace vMenuClient
             #endregion
 
             #region Ped Props
-            for (int tmpProp = 0; tmpProp < 5; tmpProp++)
+            for (var tmpProp = 0; tmpProp < 5; tmpProp++)
             {
-                int realProp = tmpProp > 2 ? tmpProp + 3 : tmpProp;
+                var realProp = tmpProp > 2 ? tmpProp + 3 : tmpProp;
 
-                int currentProp = GetPedPropIndex(Game.PlayerPed.Handle, realProp);
-                int maxPropVariations = GetNumberOfPedPropDrawableVariations(Game.PlayerPed.Handle, realProp);
+                var currentProp = GetPedPropIndex(Game.PlayerPed.Handle, realProp);
+                var maxPropVariations = GetNumberOfPedPropDrawableVariations(Game.PlayerPed.Handle, realProp);
 
                 if (maxPropVariations > 0)
                 {
-                    List<string> propTexturesList = new List<string>();
-
-                    propTexturesList.Add($"Prop #1 (of {maxPropVariations + 1})");
-                    for (int i = 0; i < maxPropVariations; i++)
+                    var propTexturesList = new List<string>
+                    {
+                        $"Prop #1 (of {maxPropVariations + 1})"
+                    };
+                    for (var i = 0; i < maxPropVariations; i++)
                     {
                         propTexturesList.Add($"Prop #{i + 2} (of {maxPropVariations + 1})");
                     }
 
 
-                    MenuListItem propTextures = new MenuListItem($"{propNames[tmpProp]}", propTexturesList, currentProp + 1, $"Use ← & → to select a ~o~{propNames[tmpProp]} Variation~s~, press ~r~enter~s~ to cycle through the available textures.");
+                    var propTextures = new MenuListItem($"{propNames[tmpProp]}", propTexturesList, currentProp + 1, $"Use ← & → to select a ~o~{propNames[tmpProp]} Variation~s~, press ~r~enter~s~ to cycle through the available textures.");
                     propsMenuListItems.Add(propTextures, realProp);
                     pedCustomizationMenu.AddMenuItem(propTextures);
 
@@ -685,7 +680,7 @@ namespace vMenuClient
         }
 
         #region Textures & Props
-        private readonly List<string> textureNames = new List<string>()
+        private readonly List<string> textureNames = new()
         {
             "Head",
             "Mask / Facial Hair",
@@ -701,7 +696,7 @@ namespace vMenuClient
             "Shirt Overlay / Jackets",
         };
 
-        private readonly List<string> propNames = new List<string>()
+        private readonly List<string> propNames = new()
         {
             "Hats / Helmets", // id 0
             "Glasses", // id 1
@@ -1181,7 +1176,7 @@ namespace vMenuClient
         //    };
 
         #region Model Names
-        private Dictionary<string, string> mainModels = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> mainModels = new()
         {
             ["player_one"] = "Franklin",
             ["player_two"] = "Trevor",
@@ -1189,9 +1184,10 @@ namespace vMenuClient
             ["mp_f_freemode_01"] = "FreemodeFemale01",
             ["mp_m_freemode_01"] = "FreemodeMale01"
         };
-        private Dictionary<string, string> animalModels = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> animalModels = new()
         {
-             ["a_c_boar"] = "Boar",
+            ["a_c_boar"] = "Boar",
+            ["a_c_boar_02"] = "Boar 2", // mp2023_01
             ["a_c_cat_01"] = "Cat",
             ["a_c_chickenhawk"] = "ChickenHawk",
             ["a_c_chimp"] = "Chimp",
@@ -1201,8 +1197,10 @@ namespace vMenuClient
             ["a_c_cormorant"] = "Cormorant",
             ["a_c_cow"] = "Cow",
             ["a_c_coyote"] = "Coyote",
+            ["a_c_coyote_02"] = "Coyote 2", // mp2023_01
             ["a_c_crow"] = "Crow",
             ["a_c_deer"] = "Deer",
+            ["a_c_deer_02"] = "Deer 2", // mp2023_01
             ["a_c_dolphin"] = "Dolphin",
             ["a_c_fish"] = "Fish",
             ["a_c_hen"] = "Hen",
@@ -1210,11 +1208,13 @@ namespace vMenuClient
             ["a_c_husky"] = "Husky",
             ["a_c_killerwhale"] = "KillerWhale",
             ["a_c_mtlion"] = "MountainLion",
+            ["a_c_mtlion_02"] = "MountainLion 2", // mp2023_01
             ["a_c_panther"] = "Panther", // mpheist4
             ["a_c_pig"] = "Pig",
             ["a_c_pigeon"] = "Pigeon",
             ["a_c_poodle"] = "Poodle",
             ["a_c_pug"] = "Pug",
+            ["a_c_pug_02"] = "Pug 2", // mp2023_01
             ["a_c_rabbit_01"] = "Rabbit",
             ["a_c_rabbit_02"] = "Rabbit 2", // mpchristmas3
             ["a_c_rat"] = "Rat",
@@ -1228,7 +1228,7 @@ namespace vMenuClient
             ["a_c_stingray"] = "Stingray",
             ["a_c_westy"] = "Westy"
         };
-        private Dictionary<string, string> maleModels = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> maleModels = new()
         {
             ["a_m_m_acult_01"] = "Acult01AMM",
             ["a_m_m_afriamer_01"] = "AfriAmer01AMM",
@@ -1306,6 +1306,7 @@ namespace vMenuClient
             ["a_m_y_business_02"] = "Business02AMY",
             ["a_m_y_business_03"] = "Business03AMY",
             ["a_m_y_carclub_01"] = "CarClub01AMY", // mptuner
+            ["a_m_y_carclub_02"] = "CarClub02AMY", // mp2024_02
             ["a_m_y_clubcust_01"] = "ClubCust01AMY",
             ["a_m_y_clubcust_02"] = "ClubCust02AMY",
             ["a_m_y_clubcust_03"] = "ClubCust03AMY",
@@ -1369,7 +1370,7 @@ namespace vMenuClient
             ["a_m_y_vinewood_04"] = "Vinewood04AMY",
             ["a_m_y_yoga_01"] = "Yoga01AMY"
         };
-        private Dictionary<string, string> femaleModels = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> femaleModels = new()
         {
             ["a_f_m_beach_01"] = "Beach01AFM",
             ["a_f_m_bevhills_01"] = "Bevhills01AFM",
@@ -1413,6 +1414,7 @@ namespace vMenuClient
             ["a_f_y_business_03"] = "Business03AFY",
             ["a_f_y_business_04"] = "Business04AFY",
             ["a_f_y_carclub_01"] = "CarClub01AFY", // mptuner
+            ["a_f_y_carclub_02"] = "CarClub02AFY", // mp2024_02
             ["a_f_y_clubcust_01"] = "ClubCust01AFY",
             ["a_f_y_clubcust_02"] = "ClubCust02AFY",
             ["a_f_y_clubcust_03"] = "ClubCust03AFY",
@@ -1455,7 +1457,7 @@ namespace vMenuClient
             ["a_f_y_vinewood_04"] = "Vinewood04AFY",
             ["a_f_y_yoga_01"] = "Yoga01AFY"
         };
-        private Dictionary<string, string> otherPeds = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> otherPeds = new()
         {
             ["csb_abigail"] = "AbigailCutscene",
             ["csb_agatha"] = "AgathaCutscene", // mpvinewood
@@ -1477,6 +1479,8 @@ namespace vMenuClient
             ["csb_brucie2"] = "Brucie2Cutscene", // patchday22ng
             ["csb_bryony"] = "BryonyCutscene",
             ["csb_burgerdrug"] = "BurgerDrugCutscene",
+            ["csb_callgirl_01"] = "CallGirl01Cutscene", // mp2023_02
+            ["csb_callgirl_02"] = "CallGirl02Cutscene", // mp2023_02
             ["csb_car3guy1"] = "Car3Guy1Cutscene",
             ["csb_car3guy2"] = "Car3Guy2Cutscene",
             ["csb_celeb_01"] = "Celeb01Cutscene", // mpheist3
@@ -1506,6 +1510,7 @@ namespace vMenuClient
             ["csb_hao"] = "HaoCutscene",
             ["csb_hao_02"] = "Hao02Cutscene", // patchday26ng
             ["csb_helmsmanpavel"] = "HelmsmanPavelCutscene", // mpheist4
+            ["csb_helmsmanpavel_02"] = "HelmsmanPavel02Cutscene", // mp2024_02
             ["csb_huang"] = "HuangCutscene", // mpheist3
             ["csb_hugh"] = "HughCutscene",
             ["csb_imani"] = "ImaniCutscene", // mpsecurity
@@ -1516,14 +1521,18 @@ namespace vMenuClient
             ["csb_isldj_03"] = "IslDJ03Cutscene", // mpheist4
             ["csb_isldj_04"] = "IslDJ04Cutscene", // mpheist4
             ["csb_jackhowitzer"] = "JackHowitzerCutscene",
+            ["csb_jamalamir"] = "JamalAmirCutscene", // mp2023_02
             ["csb_janitor"] = "JanitorCutscene",
+            ["csb_jenettee"] = "JenetteECutscene", // mp2024_01
             ["csb_jio"] = "JIOCutscene", // mpheist4
             ["csb_jio_02"] = "JIO02Cutscene", // mpsecurity
+            ["csb_jodimarshall"] = "JodiMarshallCutscene", // mp2024_02
             ["csb_johnny_guns"] = "JohnnyGunsCutscene", // mpsecurity
             ["csb_juanstrickler"] = "JuanStricklerCutscene", // mpheist4
             ["csb_labrat"] = "LabratCutscene", // mpchristmas3
             ["csb_luchadora"] = "LuchadoraCutscene", // mpchristmas3
             ["csb_maude"] = "MaudeCutscene",
+            ["csb_maude_02"] = "Maude02Cutscene", // mp2024_01
             ["csb_miguelmadrazo"] = "MiguelMadrazoCutscene", // mpheist4
             ["csb_mimi"] = "MimiCutscene", // mptuner
             ["csb_mjo"] = "MJOCutscene", // mpheist4
@@ -1536,6 +1545,7 @@ namespace vMenuClient
             ["csb_mweather"] = "MerryWeatherCutscene",
             ["csb_ortega"] = "OrtegaCutscene",
             ["csb_oscar"] = "OscarCutscene",
+            ["csb_oscar_02"] = "Oscar02Cutscene", // mp2024_02
             ["csb_paige"] = "PaigeCutscene",
             ["csb_party_promo"] = "PartyPromoCutscene", // mpsecurity
             ["csb_popov"] = "PopovCutscene",
@@ -1572,6 +1582,8 @@ namespace vMenuClient
             ["csb_vernon"] = "VernonCutscene", // mpsecurity
             ["csb_vincent"] = "VincentCutscene", // mpvinewood
             ["csb_vincent_2"] = "Vincent2Cutscene", // mpheist3
+            ["csb_vincent_4"] = "Vincent4Cutscene", // mp2023_02
+            ["csb_yusufamir"] = "YusufAmirCuscene", // mp2023_02
             ["csb_wendy"] = "WendyCutscene", // mpheist3
             ["g_f_importexport_01"] = "ImportExport01GF",
             ["g_f_m_fooliganz_01"] = "Fooliganz01GFM", // mpchristmas3
@@ -1583,8 +1595,9 @@ namespace vMenuClient
             ["g_m_m_armboss_01"] = "ArmBoss01GMM",
             ["g_m_m_armgoon_01"] = "ArmGoon01GMM",
             ["g_m_m_armlieut_01"] = "ArmLieut01GMM",
-            ["g_m_m_cartelguards_01"] = "CarterGuards01GMM", // mpheist4
-            ["g_m_m_cartelguards_02"] = "CarterGuards02GMM", // mpheist4
+            ["g_m_m_cartelgoons_01"] = "CartelGoons01GMM", // mp2023_02
+            ["g_m_m_cartelguards_01"] = "CartelGuards01GMM", // mpheist4
+            ["g_m_m_cartelguards_02"] = "CartelGuards02GMM", // mpheist4
             ["g_m_m_casrn_01"] = "CasRN01MM", // mpvinewood
             ["g_m_m_chemwork_01"] = "ChemWork01GMM",
             ["g_m_m_chiboss_01"] = "ChiBoss01GMM",
@@ -1596,10 +1609,14 @@ namespace vMenuClient
             ["g_m_m_genthug_01"] = "GenThug01GMM", // mpsum2
             ["g_m_m_goons_01"] = "Goons01GMM", // mpsecurity
             ["g_m_m_korboss_01"] = "KorBoss01GMM",
+            ["g_m_m_maragrande_01"] = "MaraGrande01GMM", // mp2023_02
             ["g_m_m_mexboss_01"] = "MexBoss01GMM",
             ["g_m_m_mexboss_02"] = "MexBoss02GMM",
             ["g_m_m_prisoners_01"] = "Prisoners01GMM", // mptuner
             ["g_m_m_slasher_01"] = "Shalsher01GMM", // patchday27ng
+            ["g_m_m_zombie_01"] = "Zombie01GMM", // mp2024_01
+            ["g_m_m_zombie_02"] = "Zombie02GMM", // mp2024_01
+            ["g_m_m_zombie_03"] = "Zombie03GMM", // mp2024_01
             ["g_m_y_armgoon_02"] = "ArmGoon02GMY",
             ["g_m_y_azteca_01"] = "Azteca01GMY",
             ["g_m_y_ballaeast_01"] = "BallaEast01GMY",
@@ -1634,8 +1651,10 @@ namespace vMenuClient
             ["ig_agatha"] = "Agatha", // mpvinewood
             ["ig_agent"] = "Agent",
             ["ig_agent_02"] = "Agent02", //mpsum2
+            ["ig_ahronward"] = "AhronWard", // mp2023_02
             ["ig_amandatownley"] = "AmandaTownley",
             ["ig_andreas"] = "Andreas",
+            ["ig_armsmanufac_01"] = "ArmsManufac01", // mp2024_02
             ["ig_ary"] = "ARY", // mpheist4
             ["ig_ary_02"] = "ARY02", // mpsecurity
             ["ig_ashley"] = "Ashley",
@@ -1652,9 +1671,17 @@ namespace vMenuClient
             ["ig_bestmen"] = "Bestmen",
             ["ig_beverly"] = "Beverly",
             ["ig_billionaire"] = "Billionaire", // mpsecurity
+            ["ig_bountytarget_01"] = "BountyTarget01", // mp2024_01
+            ["ig_bountytarget_02"] = "BountyTarget02", // mp2024_01
+            ["ig_bountytarget_03"] = "BountyTarget03", // mp2024_01
+            ["ig_bountytarget_04"] = "BountyTarget04", // mp2024_01
+            ["ig_bountytarget_05"] = "BountyTarget05", // mp2024_01
+            ["ig_bountytarget_06"] = "BountyTarget06", // mp2024_01
             ["ig_brad"] = "Brad",
             ["ig_bride"] = "Bride",
             ["ig_brucie2"] = "Brucie2", // patchday22ng
+            ["ig_callgirl_01"] = "CallGirl01", // mp2023_02
+            ["ig_callgirl_02"] = "CallGirl02", // mp2023_02
             ["ig_car3guy1"] = "Car3Guy1",
             ["ig_car3guy2"] = "Car3Guy2",
             ["ig_casey"] = "Casey",
@@ -1707,11 +1734,13 @@ namespace vMenuClient
             ["ig_golfer_a"] = "GolferA", // mpsecurity
             ["ig_golfer_b"] = "GolferB", // mpsecurity
             ["ig_groom"] = "Groom",
+            ["ig_guadalope"] = "Guadalope", // mp2024_02
             ["ig_gunvanseller"] = "GunVanSeller", // mpchristmas3
             ["ig_gustavo"] = "Gustavo", // mpheist4
             ["ig_hao"] = "Hao",
             ["ig_hao_02"] = "Hao02", // patchday26ng
             ["ig_helmsmanpavel"] = "HelmsmanPavel", // mpheist4
+            ["ig_helmsmanpavel_02"] = "HelmsmanPavel02", // mp2024_02
             ["ig_hippyleader"] = "HippyLeader", // mpchristmas3
             ["ig_huang"] = "Huang", // mpheist3
             ["ig_hunter"] = "Hunter",
@@ -1725,8 +1754,11 @@ namespace vMenuClient
             ["ig_isldj_04_d_02"] = "ISLDJ04D02", // mpheist4
             ["ig_isldj_04_e_01"] = "ISLDJ04E01", // mpheist4
             ["ig_jackie"] = "Jackie", // mpheist4
+            ["ig_jamalamir"] = "JamalAmir", // mp2023_02
             ["ig_janet"] = "Janet",
             ["ig_jay_norris"] = "JayNorris",
+            ["ig_jaywalker"] = "JayWalker", // mp2023_02
+            ["ig_jenettee"] = "JenetteE", // mp2024_01
             ["ig_jewelass"] = "Jewelass",
             ["ig_jimmyboston"] = "JimmyBoston",
             ["ig_jimmyboston_02"] = "JimmyBoston02",
@@ -1734,6 +1766,7 @@ namespace vMenuClient
             ["ig_jimmydisanto2"] = "JimmyDisanto2", // mpheist3
             ["ig_jio"] = "JIO", // mpheist4
             ["ig_jio_02"] = "JIO02", // mpsecurity
+            ["ig_jodimarshall"] = "JodiMarshall", // mp2024_02
             ["ig_joeminuteman"] = "JoeMinuteman",
             ["ig_johnny_guns"] = "JohnnyGuns", // mpsecurity
             ["ig_johnnyklebitz"] = "JohnnyKlebitz",
@@ -1764,6 +1797,10 @@ namespace vMenuClient
             ["ig_maryann"] = "MaryAnn",
             ["ig_mason_duggan"] = "MasonDuggan", // mpsum2
             ["ig_maude"] = "Maude",
+            ["ig_maudebf"] = "MaudeBF", // mp2024_01
+            ["ig_mechanic_01"] = "Mechanic01", // mp2023_02
+            ["ig_mechanic_02"] = "Mechanic02", // mp2023_02
+            ["ig_mechanic_03"] = "Mechanic03", // mp2024_01
             ["ig_michelle"] = "Michelle",
             ["ig_miguelmadrazo"] = "MiguelMadrazo", // mpheist4
             ["ig_milton"] = "Milton",
@@ -1789,13 +1826,15 @@ namespace vMenuClient
             ["ig_oneil"] = "ONeil",
             ["ig_orleans"] = "Orleans",
             ["ig_ortega"] = "Ortega",
+            ["ig_oscar_02"] = "Oscar02", // mp2024_02
             ["ig_paige"] = "Paige",
-            ["ig_parnell_moss"] = "ParnellMoss", // mp2023_01
+            ["ig_pernell_moss"] = "PernellMoss", // mp2023_01
             ["ig_paper"] = "Paper",
             ["ig_party_promo"] = "PartyPromo", // mpsecurity
             ["ig_patricia"] = "Patricia",
             ["ig_patricia_02"] = "Patricia02", // mpheist4
             ["ig_pilot"] = "Pilot", // mpheist4
+            ["ig_pilot_02"] = "Pilot02", // mp2023_02
             ["ig_popov"] = "Popov",
             ["ig_priest"] = "Priest",
             ["ig_prolsec_02"] = "PrologueSec02",
@@ -1819,6 +1858,7 @@ namespace vMenuClient
             ["ig_sss"] = "SSS", // mpheist4
             ["ig_stevehains"] = "SteveHains",
             ["ig_stretch"] = "Stretch",
+            ["ig_subcrewhead"] = "SubCrewHead", // mp2023_02
             ["ig_talcc"] = "TalCC",
             ["ig_talina"] = "Talina",
             ["ig_talmm"] = "TalMM",
@@ -1844,9 +1884,11 @@ namespace vMenuClient
             ["ig_vincent"] = "Vincent", // mpvinewood
             ["ig_vincent_2"] = "Vincent2", // mpheist3
             ["ig_vincent_3"] = "Vincent3", // mpsecurity
+            ["ig_vincent_4"] = "Vincent4", // mp2023_02
             ["ig_wade"] = "Wade",
             ["ig_warehouseboss"] = "WarehouseBoss", // mpsum2
             ["ig_wendy"] = "Wendy", // mpheist3
+            ["ig_yusufamir"] = "YusufAmir", // mp2023_02
             ["ig_zimbor"] = "Zimbor",
             ["mp_f_bennymech_01"] = "BennyMechanic01",
             ["mp_f_boatstaff_01"] = "MBoatStaff01",
@@ -1923,13 +1965,16 @@ namespace vMenuClient
             ["s_m_m_autoshop_01"] = "Autoshop01SMM",
             ["s_m_m_autoshop_02"] = "Autoshop02SMM",
             ["s_m_m_autoshop_03"] = "Autoshop03SMM", // mptuner
+            ["s_m_m_bailoffice_01"] = "BailOffice01SMM", // mp2024_01
             ["s_m_m_bouncer_01"] = "Bouncer01SMM",
             ["s_m_m_bouncer_02"] = "Bouncer02SMM", // mpheist4
             ["s_m_m_ccrew_01"] = "CCrew01SMM",
             ["s_m_m_ccrew_02"] = "CCrew02SMM", // mp2023_01
+            ["s_m_m_ccrew_03"] = "CCrew03SMM", // mp2023_02
             ["s_m_m_chemsec_01"] = "ChemSec01SMM",
             ["s_m_m_ciasec_01"] = "CiaSec01SMM",
             ["s_m_m_cntrybar_01"] = "Cntrybar01SMM",
+            ["s_m_m_cop_01"] = "Cop01SMM", // mp2023_02
             ["s_m_m_dockwork_01"] = "Dockwork01SMM",
             ["s_m_m_doctor_01"] = "Doctor01SMM",
             ["s_m_m_drugprocess_01"] = "DrugProcess01SMM", // mpheist4
@@ -1975,6 +2020,7 @@ namespace vMenuClient
             ["s_m_m_studioassist_02"] = "StudioAssist02SMM", // mpsecurity
             ["s_m_m_studioprod_01"] = "StudioProd01SMM", // mpsecurity
             ["s_m_m_studiosoueng_02"] = "StudioSouEng02SMM", // mpsecurity
+            ["s_m_m_subcrew_01"] = "SubCrew01SMM", // mp2023_02
             ["s_m_m_tattoo_01"] = "Tattoo01SMM", // mptuner
             ["s_m_m_trucker_01"] = "Trucker01SMM",
             ["s_m_m_ups_01"] = "Ups01SMM",
@@ -2085,6 +2131,7 @@ namespace vMenuClient
             ["u_m_m_streetart_01"] = "StreetArt01",
             ["u_m_m_vince"] = "Vince", // mpvinewood
             ["u_m_m_willyfist"] = "WillyFist",
+            ["u_m_m_yeti"] = "Yeti", // mp2023_02
             ["u_m_m_yulemonster"] = "YuleMonster", // mpchristmas3
             ["u_m_o_dean"] = "Dean", // mpvinewood
             ["u_m_o_finguru_01"] = "Finguru01",
